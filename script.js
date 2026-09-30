@@ -12,7 +12,7 @@ const SUPABASE_URL =
     "https://jlezckirqlhwcaehrvfo.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY =
-    "PASTE_YOUR_PUBLISHABLE_KEY_HERE";
+    "sb_publishable_Xrcm01E7j7oujgayh4b72A_w2b48uPn";
 
 
 
@@ -124,6 +124,7 @@ if (bookingForm) {
             // ========================================
 
             if (
+                !SUPABASE_PUBLISHABLE_KEY ||
                 SUPABASE_PUBLISHABLE_KEY ===
                 "PASTE_YOUR_PUBLISHABLE_KEY_HERE"
             ) {
@@ -283,6 +284,17 @@ if (bookingForm) {
                 window.open(
                     whatsappURL,
                     "_blank"
+                );
+
+
+
+                // ========================================
+                // SUCCESS MESSAGE
+                // ========================================
+
+                alert(
+                    "Booking saved successfully!\n\n" +
+                    "Please send the WhatsApp message to confirm your appointment."
                 );
 
 
