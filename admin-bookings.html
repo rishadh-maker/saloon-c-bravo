@@ -107,12 +107,16 @@
 
 
 
-        <!-- BOOKING SUMMARY -->
+        <!-- ========================================
+             BOOKING SUMMARY
+        ========================================= -->
 
         <section class="services-page">
 
             <div class="service-cards">
 
+
+                <!-- TOTAL -->
 
                 <div class="service-card">
 
@@ -124,12 +128,15 @@
                         Total Bookings
                     </h3>
 
-                    <p>
+                    <p id="totalBookings">
                         0
                     </p>
 
                 </div>
 
+
+
+                <!-- PENDING -->
 
                 <div class="service-card">
 
@@ -141,12 +148,15 @@
                         Pending
                     </h3>
 
-                    <p>
+                    <p id="pendingBookings">
                         0
                     </p>
 
                 </div>
 
+
+
+                <!-- CONFIRMED -->
 
                 <div class="service-card">
 
@@ -158,12 +168,15 @@
                         Confirmed
                     </h3>
 
-                    <p>
+                    <p id="confirmedBookings">
                         0
                     </p>
 
                 </div>
 
+
+
+                <!-- CANCELLED -->
 
                 <div class="service-card">
 
@@ -175,11 +188,12 @@
                         Cancelled
                     </h3>
 
-                    <p>
+                    <p id="cancelledBookings">
                         0
                     </p>
 
                 </div>
+
 
             </div>
 
@@ -187,7 +201,9 @@
 
 
 
-        <!-- BOOKING TABLE -->
+        <!-- ========================================
+             BOOKINGS
+        ========================================= -->
 
         <section class="services-page">
 
@@ -197,6 +213,21 @@
                     Customer Bookings
                 </h2>
 
+
+                <p
+                    style="
+                        margin-top:10px;
+                        color:#aaa;
+                    "
+                >
+                    Bookings received through
+                    WhatsApp can be managed here
+                    after they are added to the system.
+                </p>
+
+
+
+                <!-- BOOKING TABLE -->
 
                 <div
                     style="
@@ -209,7 +240,7 @@
                         style="
                             width:100%;
                             border-collapse:collapse;
-                            min-width:900px;
+                            min-width:1100px;
                         "
                     >
 
@@ -298,7 +329,7 @@
                         </thead>
 
 
-                        <tbody>
+                        <tbody id="bookingTableBody">
 
                             <tr>
 
@@ -315,8 +346,9 @@
 
                                     <br><br>
 
-                                    Customer bookings
-                                    will appear here.
+                                    Customer bookings will
+                                    appear here when the
+                                    booking database is connected.
 
                                 </td>
 
@@ -335,7 +367,9 @@
 
 
 
-        <!-- INFORMATION -->
+        <!-- ========================================
+             CUSTOMER CONTACT
+        ========================================= -->
 
         <section class="booking-preview">
 
@@ -343,10 +377,20 @@
                 📱 Customer Contact
             </h2>
 
+
             <p>
-                Future bookings will include
-                WhatsApp and phone contact
-                options.
+                Use the customer's phone number
+                to contact them by WhatsApp or phone.
+            </p>
+
+
+            <br>
+
+
+            <p>
+                The booking system will later
+                connect these actions with real
+                customer booking records.
             </p>
 
         </section>
