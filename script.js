@@ -70,27 +70,39 @@ if (bookingForm) {
 
 
             const name =
-                document.getElementById("name").value.trim();
+                document.getElementById(
+                    "name"
+                ).value.trim();
 
 
             const phone =
-                document.getElementById("phone").value.trim();
+                document.getElementById(
+                    "phone"
+                ).value.trim();
 
 
             const service =
-                document.getElementById("service").value;
+                document.getElementById(
+                    "service"
+                ).value;
 
 
             const date =
-                document.getElementById("date").value;
+                document.getElementById(
+                    "date"
+                ).value;
 
 
             const time =
-                document.getElementById("time").value;
+                document.getElementById(
+                    "time"
+                ).value;
 
 
             const message =
-                document.getElementById("message").value.trim();
+                document.getElementById(
+                    "message"
+                ).value.trim();
 
 
 
@@ -99,7 +111,7 @@ if (bookingForm) {
             // ========================================
 
             const adminWhatsApp =
-                "947XXXXXXXXX";
+                "94701130050";
 
 
 
@@ -155,7 +167,6 @@ if (bookingForm) {
                 encodeURIComponent(
                     whatsappMessage
                 );
-
 
 
             window.open(
@@ -286,7 +297,7 @@ if (adminLoginForm) {
 
 
 // ========================================
-// ADMIN DASHBOARD SECURITY
+// ADMIN PAGE SECURITY
 // ========================================
 
 const isAdminPage =
