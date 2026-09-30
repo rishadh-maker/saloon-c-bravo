@@ -8,35 +8,45 @@
 // MOBILE MENU
 // ========================================
 
-const menuToggle = document.getElementById("menuToggle");
+const menuToggle =
+    document.getElementById("menuToggle");
 
-const navLinks = document.getElementById("navLinks");
+const navLinks =
+    document.getElementById("navLinks");
 
 
 if (menuToggle && navLinks) {
 
-    menuToggle.addEventListener("click", function () {
+    menuToggle.addEventListener(
+        "click",
+        function () {
 
-        navLinks.classList.toggle("active");
+            navLinks.classList.toggle("active");
 
-    });
+        }
+    );
 
-
-    // Close menu after clicking a link
 
     const menuItems =
         navLinks.querySelectorAll("a");
 
 
-    menuItems.forEach(function (link) {
+    menuItems.forEach(
+        function (link) {
 
-        link.addEventListener("click", function () {
+            link.addEventListener(
+                "click",
+                function () {
 
-            navLinks.classList.remove("active");
+                    navLinks.classList.remove(
+                        "active"
+                    );
 
-        });
+                }
+            );
 
-    });
+        }
+    );
 
 }
 
@@ -148,6 +158,87 @@ if (contactForm) {
 
 
             contactForm.reset();
+
+        }
+    );
+
+}
+
+
+
+// ========================================
+// ADMIN LOGIN
+// ========================================
+
+const adminLoginForm =
+    document.getElementById(
+        "adminLoginForm"
+    );
+
+
+if (adminLoginForm) {
+
+    adminLoginForm.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            const username =
+                document.getElementById(
+                    "adminUsername"
+                ).value;
+
+
+            const password =
+                document.getElementById(
+                    "adminPassword"
+                ).value;
+
+
+            /*
+                DEMO LOGIN
+
+                Username:
+                admin
+
+                Password:
+                admin123
+            */
+
+
+            if (
+                username === "admin" &&
+                password === "admin123"
+            ) {
+
+                sessionStorage.setItem(
+                    "adminLoggedIn",
+                    "true"
+                );
+
+
+                window.location.href =
+                    "admin-dashboard.html";
+
+            }
+
+            else {
+
+                const loginMessage =
+                    document.getElementById(
+                        "loginMessage"
+                    );
+
+
+                loginMessage.textContent =
+                    "Invalid username or password.";
+
+                loginMessage.style.color =
+                    "#ff5555";
+
+            }
 
         }
     );
