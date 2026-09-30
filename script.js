@@ -197,17 +197,6 @@ if (adminLoginForm) {
                 ).value;
 
 
-            /*
-                DEMO LOGIN
-
-                Username:
-                admin
-
-                Password:
-                admin123
-            */
-
-
             if (
                 username === "admin" &&
                 password === "admin123"
@@ -239,6 +228,69 @@ if (adminLoginForm) {
                     "#ff5555";
 
             }
+
+        }
+    );
+
+}
+
+
+
+// ========================================
+// ADMIN DASHBOARD SECURITY
+// ========================================
+
+const isDashboard =
+    window.location.pathname.includes(
+        "admin-dashboard.html"
+    );
+
+
+if (isDashboard) {
+
+    const adminLoggedIn =
+        sessionStorage.getItem(
+            "adminLoggedIn"
+        );
+
+
+    if (adminLoggedIn !== "true") {
+
+        window.location.href =
+            "admin-login.html";
+
+    }
+
+}
+
+
+
+// ========================================
+// ADMIN LOGOUT
+// ========================================
+
+const logoutButton =
+    document.getElementById(
+        "logoutButton"
+    );
+
+
+if (logoutButton) {
+
+    logoutButton.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+
+            sessionStorage.removeItem(
+                "adminLoggedIn"
+            );
+
+
+            window.location.href =
+                "admin-login.html";
 
         }
     );
