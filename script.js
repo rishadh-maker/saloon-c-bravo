@@ -53,7 +53,7 @@ if (menuToggle && navLinks) {
 
 
 // ========================================
-// BOOKING FORM
+// BOOKING FORM → WHATSAPP
 // ========================================
 
 const bookingForm =
@@ -70,49 +70,98 @@ if (bookingForm) {
 
 
             const name =
-                document.getElementById("name").value;
+                document.getElementById("name").value.trim();
+
 
             const phone =
-                document.getElementById("phone").value;
+                document.getElementById("phone").value.trim();
+
 
             const service =
                 document.getElementById("service").value;
 
+
             const date =
                 document.getElementById("date").value;
+
 
             const time =
                 document.getElementById("time").value;
 
 
-            alert(
+            const message =
+                document.getElementById("message").value.trim();
 
-                "Thank you, " +
+
+
+            // ========================================
+            // MAIN ADMIN WHATSAPP NUMBER
+            // ========================================
+
+            const adminWhatsApp =
+                "947XXXXXXXXX";
+
+
+
+            // ========================================
+            // CREATE WHATSAPP MESSAGE
+            // ========================================
+
+            const whatsappMessage =
+
+                "🔔 NEW BOOKING - SALOON C BRAVO\n\n" +
+
+                "👤 Customer Name: " +
                 name +
-                "!\n\n" +
+                "\n" +
 
-                "Your booking request has been received.\n\n" +
+                "📞 Phone: " +
+                phone +
+                "\n" +
 
-                "Service: " +
+                "💇 Service: " +
                 service +
                 "\n" +
 
-                "Date: " +
+                "📅 Date: " +
                 date +
                 "\n" +
 
-                "Time: " +
+                "⏰ Time: " +
                 time +
+                "\n" +
+
+                "📝 Message: " +
+                (
+                    message ||
+                    "No additional message"
+                ) +
+
                 "\n\n" +
 
-                "We will contact you on " +
-                phone +
-                "."
+                "Please confirm this appointment.";
 
+
+
+            // ========================================
+            // OPEN WHATSAPP
+            // ========================================
+
+            const whatsappURL =
+
+                "https://wa.me/" +
+                adminWhatsApp +
+                "?text=" +
+                encodeURIComponent(
+                    whatsappMessage
+                );
+
+
+
+            window.open(
+                whatsappURL,
+                "_blank"
             );
-
-
-            bookingForm.reset();
 
         }
     );
@@ -240,13 +289,18 @@ if (adminLoginForm) {
 // ADMIN DASHBOARD SECURITY
 // ========================================
 
-const isDashboard =
+const isAdminPage =
+
     window.location.pathname.includes(
         "admin-dashboard.html"
+    ) ||
+
+    window.location.pathname.includes(
+        "admin-bookings.html"
     );
 
 
-if (isDashboard) {
+if (isAdminPage) {
 
     const adminLoggedIn =
         sessionStorage.getItem(
