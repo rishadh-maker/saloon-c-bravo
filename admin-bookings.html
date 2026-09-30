@@ -1,1 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Manage Bookings | SALOON C BRAVO
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ========================================
+         HEADER
+    ========================================= -->
+
+    <header>
+
+        <nav class="navbar">
+
+            <div class="logo">
+                SALOON C BRAVO
+            </div>
+
+
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                type="button"
+            >
+                ☰
+            </button>
+
+
+            <ul
+                class="nav-links"
+                id="navLinks"
+            >
+
+                <li>
+                    <a href="admin-dashboard.html">
+                        Dashboard
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="index.html">
+                        Website
+                    </a>
+                </li>
+
+
+                <li>
+                    <a
+                        href="#"
+                        id="logoutButton"
+                    >
+                        Logout
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- ========================================
+         MAIN
+    ========================================= -->
+
+    <main>
+
+
+        <!-- PAGE HEADER -->
+
+        <section class="page-header">
+
+            <h1>
+                Manage Bookings
+            </h1>
+
+            <p>
+                View and manage customer
+                appointments.
+            </p>
+
+        </section>
+
+
+
+        <!-- BOOKING SUMMARY -->
+
+        <section class="services-page">
+
+            <div class="service-cards">
+
+
+                <div class="service-card">
+
+                    <h2>
+                        📅
+                    </h2>
+
+                    <h3>
+                        Total Bookings
+                    </h3>
+
+                    <p>
+                        0
+                    </p>
+
+                </div>
+
+
+                <div class="service-card">
+
+                    <h2>
+                        🟡
+                    </h2>
+
+                    <h3>
+                        Pending
+                    </h3>
+
+                    <p>
+                        0
+                    </p>
+
+                </div>
+
+
+                <div class="service-card">
+
+                    <h2>
+                        🟢
+                    </h2>
+
+                    <h3>
+                        Confirmed
+                    </h3>
+
+                    <p>
+                        0
+                    </p>
+
+                </div>
+
+
+                <div class="service-card">
+
+                    <h2>
+                        🔴
+                    </h2>
+
+                    <h3>
+                        Cancelled
+                    </h3>
+
+                    <p>
+                        0
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- BOOKING TABLE -->
+
+        <section class="services-page">
+
+            <div class="booking-container">
+
+                <h2>
+                    Customer Bookings
+                </h2>
+
+
+                <div
+                    style="
+                        overflow-x:auto;
+                        margin-top:30px;
+                    "
+                >
+
+                    <table
+                        style="
+                            width:100%;
+                            border-collapse:collapse;
+                            min-width:900px;
+                        "
+                    >
+
+                        <thead>
+
+                            <tr>
+
+                                <th
+                                    style="
+                                        padding:15px;
+                                        border-bottom:1px solid #444;
+                                        text-align:left;
+                                    "
+                                >
+                                    Customer
+                                </th>
+
+
+                                <th
+                                    style="
+                                        padding:15px;
+                                        border-bottom:1px solid #444;
+                                        text-align:left;
+                                    "
+                                >
+                                    Phone
+                                </th>
+
+
+                                <th
+                                    style="
+                                        padding:15px;
+                                        border-bottom:1px solid #444;
+                                        text-align:left;
+                                    "
+                                >
+                                    Service
+                                </th>
+
+
+                                <th
+                                    style="
+                                        padding:15px;
+                                        border-bottom:1px solid #444;
+                                        text-align:left;
+                                    "
+                                >
+                                    Date
+                                </th>
+
+
+                                <th
+                                    style="
+                                        padding:15px;
+                                        border-bottom:1px solid #444;
+                                        text-align:left;
+                                    "
+                                >
+                                    Time
+                                </th>
+
+
+                                <th
+                                    style="
+                                        padding:15px;
+                                        border-bottom:1px solid #444;
+                                        text-align:left;
+                                    "
+                                >
+                                    Status
+                                </th>
+
+
+                                <th
+                                    style="
+                                        padding:15px;
+                                        border-bottom:1px solid #444;
+                                        text-align:left;
+                                    "
+                                >
+                                    Actions
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            <tr>
+
+                                <td
+                                    colspan="7"
+                                    style="
+                                        padding:40px 15px;
+                                        text-align:center;
+                                        color:#999;
+                                    "
+                                >
+
+                                    No bookings available yet.
+
+                                    <br><br>
+
+                                    Customer bookings
+                                    will appear here.
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- INFORMATION -->
+
+        <section class="booking-preview">
+
+            <h2>
+                📱 Customer Contact
+            </h2>
+
+            <p>
+                Future bookings will include
+                WhatsApp and phone contact
+                options.
+            </p>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ========================================
+         FOOTER
+    ========================================= -->
+
+    <footer>
+
+        <p>
+            © 2026 SALOON C BRAVO.
+            All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+
+    <script
+        src="script.js"
+    ></script>
+
+
+</body>
+
+</html>
