@@ -1,6 +1,6 @@
 /* ========================================
    SALOON C BRAVO
-   Main Website Styles
+   Mobile Responsive Website
 ======================================== */
 
 
@@ -23,6 +23,12 @@ body {
     background: #111111;
     color: #ffffff;
     line-height: 1.6;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }
 
 
@@ -50,6 +56,7 @@ header {
     font-size: 24px;
     font-weight: bold;
     letter-spacing: 2px;
+    white-space: nowrap;
 }
 
 .nav-links {
@@ -94,6 +101,7 @@ header {
 }
 
 .hero-content {
+    width: 100%;
     max-width: 800px;
 }
 
@@ -455,44 +463,215 @@ footer p {
 
 
 /* ========================================
-   MOBILE RESPONSIVE
+   TABLET
 ======================================== */
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
 
     .navbar {
-        flex-direction: column;
-        gap: 20px;
+        padding: 20px;
     }
 
     .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
+        gap: 18px;
     }
 
     .hero h1 {
-        font-size: 40px;
-    }
-
-    .hero p {
-        font-size: 17px;
+        font-size: 50px;
     }
 
     .service-cards {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .contact-page {
         grid-template-columns: 1fr;
     }
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+
+    /* Navigation */
+
+    .navbar {
+        padding: 18px 15px;
+
+        flex-direction: column;
+
+        gap: 18px;
+    }
+
+    .logo {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .nav-links {
+        width: 100%;
+
+        display: grid;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 8px;
+
+        text-align: center;
+    }
+
+    .nav-links a {
+        display: block;
+
+        padding: 9px 5px;
+
+        background: #171717;
+
+        border-radius: 5px;
+
+        font-size: 14px;
+    }
+
+
+    /* Hero */
+
+    .hero {
+        min-height: 70vh;
+
+        padding: 50px 15px;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .btn {
+        width: 100%;
+
+        max-width: 300px;
+
+        text-align: center;
+
+        padding: 13px 20px;
+    }
+
+
+    /* Introduction */
+
+    .intro {
+        padding: 60px 20px;
+    }
+
+    .intro h2 {
+        font-size: 30px;
+    }
+
+    .intro p {
+        font-size: 16px;
+    }
+
+
+    /* Services */
+
+    .services-preview,
+    .services-page {
+        padding: 60px 15px;
+    }
+
+    .services-preview h2,
+    .services-page h2 {
+        font-size: 30px;
+
+        margin-bottom: 30px;
+    }
+
+    .service-cards {
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+    }
+
+    .service-card {
+        padding: 28px 20px;
+    }
+
+
+    /* Page Header */
+
+    .page-header {
+        padding: 70px 15px 45px;
+    }
 
     .page-header h1 {
-        font-size: 38px;
+        font-size: 34px;
+    }
+
+    .page-header p {
+        font-size: 16px;
+    }
+
+
+    /* About */
+
+    .about-page {
+        padding: 50px 15px;
+    }
+
+    .about-content {
+        padding: 25px 20px;
+    }
+
+
+    /* Booking */
+
+    .booking-page {
+        padding: 50px 15px;
     }
 
     .booking-container {
-        padding: 25px;
+        padding: 25px 18px;
     }
 
+
+    /* Contact */
+
+    .contact-page {
+        padding: 50px 15px;
+
+        gap: 20px;
+    }
+
+    .contact-info,
+    .contact-form {
+        padding: 25px 18px;
+    }
+
+
+    /* Booking Preview */
+
+    .booking-preview {
+        padding: 60px 20px;
+    }
+
+    .booking-preview h2 {
+        font-size: 28px;
+    }
+
+
+    /* Footer */
+
+    footer {
+        padding: 25px 15px;
+    }
+
+    footer p {
+        font-size: 13px;
+    }
 }
