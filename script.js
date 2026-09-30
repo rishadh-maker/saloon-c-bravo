@@ -5,6 +5,18 @@
 
 
 // ========================================
+// SUPABASE CONFIGURATION
+// ========================================
+
+const SUPABASE_URL =
+    "https://jlezckirqlhwcaehrvfo.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "PASTE_YOUR_PUBLISHABLE_KEY_HERE";
+
+
+
+// ========================================
 // MOBILE MENU
 // ========================================
 
@@ -53,7 +65,8 @@ if (menuToggle && navLinks) {
 
 
 // ========================================
-// BOOKING FORM → WHATSAPP
+// BOOKING FORM
+// SUPABASE + WHATSAPP
 // ========================================
 
 const bookingForm =
@@ -64,7 +77,7 @@ if (bookingForm) {
 
     bookingForm.addEventListener(
         "submit",
-        function (event) {
+        async function (event) {
 
             event.preventDefault();
 
@@ -107,72 +120,195 @@ if (bookingForm) {
 
 
             // ========================================
-            // MAIN ADMIN WHATSAPP NUMBER
+            // CHECK SUPABASE KEY
             // ========================================
 
-            const adminWhatsApp =
-                "94701130050";
+            if (
+                SUPABASE_PUBLISHABLE_KEY ===
+                "PASTE_YOUR_PUBLISHABLE_KEY_HERE"
+            ) {
 
+                alert(
+                    "Supabase Publishable Key is missing."
+                );
 
+                return;
 
-            // ========================================
-            // CREATE WHATSAPP MESSAGE
-            // ========================================
-
-            const whatsappMessage =
-
-                "🔔 NEW BOOKING - SALOON C BRAVO\n\n" +
-
-                "👤 Customer Name: " +
-                name +
-                "\n" +
-
-                "📞 Phone: " +
-                phone +
-                "\n" +
-
-                "💇 Service: " +
-                service +
-                "\n" +
-
-                "📅 Date: " +
-                date +
-                "\n" +
-
-                "⏰ Time: " +
-                time +
-                "\n" +
-
-                "📝 Message: " +
-                (
-                    message ||
-                    "No additional message"
-                ) +
-
-                "\n\n" +
-
-                "Please confirm this appointment.";
+            }
 
 
 
             // ========================================
-            // OPEN WHATSAPP
+            // SAVE BOOKING TO SUPABASE
             // ========================================
 
-            const whatsappURL =
+            try {
 
-                "https://wa.me/" +
-                adminWhatsApp +
-                "?text=" +
-                encodeURIComponent(
-                    whatsappMessage
+                const response =
+                    await fetch(
+                        SUPABASE_URL +
+                        "/rest/v1/bookings",
+                        {
+
+                            method: "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json",
+
+                                "apikey":
+                                    SUPABASE_PUBLISHABLE_KEY,
+
+                                "Authorization":
+                                    "Bearer " +
+                                    SUPABASE_PUBLISHABLE_KEY,
+
+                                "Prefer":
+                                    "return=minimal"
+
+                            },
+
+                            body: JSON.stringify({
+
+                                customer_name:
+                                    name,
+
+                                customer_phone:
+                                    phone,
+
+                                service:
+                                    service,
+
+                                appointment_date:
+                                    date,
+
+                                appointment_time:
+                                    time,
+
+                                message:
+                                    message,
+
+                                status:
+                                    "Pending"
+
+                            })
+
+                        }
+                    );
+
+
+
+                // ========================================
+                // CHECK DATABASE RESPONSE
+                // ========================================
+
+                if (!response.ok) {
+
+                    const errorText =
+                        await response.text();
+
+                    console.error(
+                        "Supabase Error:",
+                        errorText
+                    );
+
+
+                    alert(
+                        "Booking could not be saved. Please try again."
+                    );
+
+                    return;
+
+                }
+
+
+
+                // ========================================
+                // WHATSAPP
+                // ========================================
+
+                const adminWhatsApp =
+                    "94701130050";
+
+
+                const whatsappMessage =
+
+                    "🔔 NEW BOOKING - SALOON C BRAVO\n\n" +
+
+                    "👤 Customer Name: " +
+                    name +
+                    "\n" +
+
+                    "📞 Phone: " +
+                    phone +
+                    "\n" +
+
+                    "💇 Service: " +
+                    service +
+                    "\n" +
+
+                    "📅 Date: " +
+                    date +
+                    "\n" +
+
+                    "⏰ Time: " +
+                    time +
+                    "\n" +
+
+                    "📝 Message: " +
+                    (
+                        message ||
+                        "No additional message"
+                    ) +
+
+                    "\n\n" +
+
+                    "Status: Pending\n\n" +
+
+                    "Please confirm this appointment.";
+
+
+
+                const whatsappURL =
+
+                    "https://wa.me/" +
+                    adminWhatsApp +
+                    "?text=" +
+                    encodeURIComponent(
+                        whatsappMessage
+                    );
+
+
+                window.open(
+                    whatsappURL,
+                    "_blank"
                 );
 
 
-            window.open(
-                whatsappURL,
-                "_blank"
-            );
+
+                // ========================================
+                // RESET FORM
+                // ========================================
+
+                bookingForm.reset();
+
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Booking Error:",
+                    error
+                );
+
+
+                alert(
+                    "Something went wrong. Please try again."
+                );
+
+            }
 
         }
     );
