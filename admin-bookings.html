@@ -220,9 +220,8 @@
                         color:#aaa;
                     "
                 >
-                    Bookings received through
-                    WhatsApp can be managed here
-                    after they are added to the system.
+                    Bookings received from the
+                    website will appear here.
                 </p>
 
 
@@ -342,13 +341,7 @@
                                     "
                                 >
 
-                                    No bookings available yet.
-
-                                    <br><br>
-
-                                    Customer bookings will
-                                    appear here when the
-                                    booking database is connected.
+                                    Loading bookings...
 
                                 </td>
 
@@ -388,9 +381,8 @@
 
 
             <p>
-                The booking system will later
-                connect these actions with real
-                customer booking records.
+                Customer booking records are loaded
+                from the booking database.
             </p>
 
         </section>
@@ -414,6 +406,401 @@
     </footer>
 
 
+
+    <!-- ========================================
+         SUPABASE BOOKING LOADER
+    ========================================= -->
+
+    <script>
+
+        const SUPABASE_URL =
+            "https://jlezckirqlhwcaehrvfo.supabase.co";
+
+
+        const SUPABASE_PUBLISHABLE_KEY =
+            "sb_publishable_Xrcm01E7j7oujgayh4b72A_w2b48uPn";
+
+
+
+        async function loadBookings() {
+
+            const tableBody =
+                document.getElementById(
+                    "bookingTableBody"
+                );
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        SUPABASE_URL +
+                        "/rest/v1/bookings?select=*&order=created_at.desc",
+                        {
+
+                            method: "GET",
+
+                            headers: {
+
+                                "apikey":
+                                    SUPABASE_PUBLISHABLE_KEY,
+
+                                "Authorization":
+                                    "Bearer " +
+                                    SUPABASE_PUBLISHABLE_KEY
+
+                            }
+
+                        }
+                    );
+
+
+
+                if (!response.ok) {
+
+                    const errorText =
+                        await response.text();
+
+                    console.error(
+                        "Supabase Error:",
+                        errorText
+                    );
+
+                    tableBody.innerHTML = `
+
+                        <tr>
+
+                            <td
+                                colspan="7"
+                                style="
+                                    padding:40px 15px;
+                                    text-align:center;
+                                    color:#ff5555;
+                                "
+                            >
+
+                                Unable to load bookings.
+
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                    return;
+
+                }
+
+
+
+                const bookings =
+                    await response.json();
+
+
+
+                // ========================================
+                // SUMMARY COUNTS
+                // ========================================
+
+                const total =
+                    bookings.length;
+
+
+                const pending =
+                    bookings.filter(
+                        booking =>
+                            booking.status === "Pending"
+                    ).length;
+
+
+                const confirmed =
+                    bookings.filter(
+                        booking =>
+                            booking.status === "Confirmed"
+                    ).length;
+
+
+                const cancelled =
+                    bookings.filter(
+                        booking =>
+                            booking.status === "Cancelled"
+                    ).length;
+
+
+
+                document.getElementById(
+                    "totalBookings"
+                ).textContent = total;
+
+
+                document.getElementById(
+                    "pendingBookings"
+                ).textContent = pending;
+
+
+                document.getElementById(
+                    "confirmedBookings"
+                ).textContent = confirmed;
+
+
+                document.getElementById(
+                    "cancelledBookings"
+                ).textContent = cancelled;
+
+
+
+                // ========================================
+                // NO BOOKINGS
+                // ========================================
+
+                if (bookings.length === 0) {
+
+                    tableBody.innerHTML = `
+
+                        <tr>
+
+                            <td
+                                colspan="7"
+                                style="
+                                    padding:40px 15px;
+                                    text-align:center;
+                                    color:#999;
+                                "
+                            >
+
+                                No bookings available yet.
+
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                    return;
+
+                }
+
+
+
+                // ========================================
+                // DISPLAY BOOKINGS
+                // ========================================
+
+                tableBody.innerHTML = "";
+
+
+
+                bookings.forEach(
+                    function (booking) {
+
+                        const row =
+                            document.createElement(
+                                "tr"
+                            );
+
+
+
+                        row.innerHTML = `
+
+                            <td
+                                style="
+                                    padding:15px;
+                                    border-bottom:1px solid #333;
+                                "
+                            >
+                                ${escapeHTML(
+                                    booking.customer_name
+                                )}
+                            </td>
+
+
+                            <td
+                                style="
+                                    padding:15px;
+                                    border-bottom:1px solid #333;
+                                "
+                            >
+                                ${escapeHTML(
+                                    booking.customer_phone
+                                )}
+                            </td>
+
+
+                            <td
+                                style="
+                                    padding:15px;
+                                    border-bottom:1px solid #333;
+                                "
+                            >
+                                ${escapeHTML(
+                                    booking.service
+                                )}
+                            </td>
+
+
+                            <td
+                                style="
+                                    padding:15px;
+                                    border-bottom:1px solid #333;
+                                "
+                            >
+                                ${escapeHTML(
+                                    booking.appointment_date
+                                )}
+                            </td>
+
+
+                            <td
+                                style="
+                                    padding:15px;
+                                    border-bottom:1px solid #333;
+                                "
+                            >
+                                ${escapeHTML(
+                                    booking.appointment_time
+                                )}
+                            </td>
+
+
+                            <td
+                                style="
+                                    padding:15px;
+                                    border-bottom:1px solid #333;
+                                "
+                            >
+                                ${escapeHTML(
+                                    booking.status ||
+                                    "Pending"
+                                )}
+                            </td>
+
+
+                            <td
+                                style="
+                                    padding:15px;
+                                    border-bottom:1px solid #333;
+                                "
+                            >
+
+                                <a
+                                    href="https://wa.me/${cleanPhone(
+                                        booking.customer_phone
+                                    )}"
+                                    target="_blank"
+                                    style="
+                                        text-decoration:none;
+                                    "
+                                >
+                                    📱 WhatsApp
+                                </a>
+
+                            </td>
+
+                        `;
+
+
+                        tableBody.appendChild(row);
+
+                    }
+                );
+
+            }
+
+
+            catch (error) {
+
+                console.error(
+                    "Booking Load Error:",
+                    error
+                );
+
+
+                tableBody.innerHTML = `
+
+                    <tr>
+
+                        <td
+                            colspan="7"
+                            style="
+                                padding:40px 15px;
+                                text-align:center;
+                                color:#ff5555;
+                            "
+                        >
+
+                            Something went wrong
+                            while loading bookings.
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
+
+        }
+
+
+
+        // ========================================
+        // SECURITY HELPER
+        // ========================================
+
+        function escapeHTML(value) {
+
+            if (value === null ||
+                value === undefined) {
+
+                return "";
+
+            }
+
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+        }
+
+
+
+        // ========================================
+        // PHONE HELPER
+        // ========================================
+
+        function cleanPhone(phone) {
+
+            if (!phone) {
+
+                return "";
+
+            }
+
+
+            return String(phone)
+                .replace(/\D/g, "");
+
+        }
+
+
+
+        // ========================================
+        // LOAD BOOKINGS
+        // ========================================
+
+        loadBookings();
+
+    </script>
+
+
+
+    <!-- ========================================
+         MAIN WEBSITE JAVASCRIPT
+    ========================================= -->
 
     <script
         src="script.js"
